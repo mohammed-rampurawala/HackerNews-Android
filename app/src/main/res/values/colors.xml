@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FF6D00</color>
+    <color name="colorPrimaryDark">#E65100</color>
+    <color name="colorAccent">#616161</color>
+    <color name="error_background_color">#E85959</color>
+    <color name="hacker_background">#F6F6EF</color>
+    <color name="secondary_text_color">#828282</color>
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:orientation="vertical"
+             android:layout_width="match_parent"
+             android:animateLayoutChanges="true"
+             android:layout_height="match_parent">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/news_list_container"
+            android:visibility="gone"
+            tools:visibility="gone"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/news_list_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:visibility="gone"/>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <ProgressBar
+            android:id="@+id/loading_progress_bar"
+            tools:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"/>
+
+    <include
+            android:id="@+id/retry_view_news_list"
+            layout="@layout/error_view"
+            android:visibility="gone"/>
+
+</FrameLayout>

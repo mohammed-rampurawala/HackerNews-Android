@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">Hacker News</string>
+    <string name="more">More</string>
+    <string name="error_text">Something went wrong at our end!</string>
+    <string name="retry">Retry</string>
+
+    <!--95 points by john 10 hours ago | 25 comments-->
+    <string name="description" formatted="false">%d %s by %s %s | %d %s</string>
+    <string name="time_ago" formatted="false">%d %s ago</string>
+    <string name="comment_is_deleted">This comment is deleted.</string>
+    <string name="comments">Comments</string>
+
+    <plurals name="hour_plural">
+        <item quantity="one">Hour</item>
+        <item quantity="many">Hours</item>
+        <item quantity="other">Hours</item>
+    </plurals>
+
+    <plurals name="comments_plural">
+        <item quantity="one">Comment</item>
+        <item quantity="many">Comments</item>
+        <item quantity="other">Comments</item>
+    </plurals>
+
+    <plurals name="points_plural">
+        <item quantity="one">Point</item>
+        <item quantity="many">Points</item>
+        <item quantity="other">Points</item>
+    </plurals>
+
+    <plurals name="years_plural">
+        <item quantity="one">Year</item>
+        <item quantity="other">Years</item>
+    </plurals>
+    <plurals name="month_plural">
+        <item quantity="one">month</item>
+        <item quantity="other">months</item>
+    </plurals>
+    <plurals name="day_plural">
+        <item quantity="one">day</item>
+        <item quantity="other">days</item>
+    </plurals>
+    <plurals name="minute_plural">
+        <item quantity="one">minute</item>
+        <item quantity="other">minutes</item>
+    </plurals>
+    <plurals name="second_plural">
+        <item quantity="one">second</item>
+        <item quantity="other">seconds</item>
+    </plurals>
+    <plurals name="week_plural">
+        <item quantity="one">week</item>
+        <item quantity="other">weeks</item>
+    </plurals>
+</resources>

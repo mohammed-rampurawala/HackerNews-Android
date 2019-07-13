@@ -1,0 +1,27 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/hacker_background</item>
+    </style>
+    <style name="error_text_style">
+        <item name="android:textSize">@dimen/error_text_size</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">@string/roboto_thin</item>
+        <item name="android:paddingLeft">@dimen/error_text_padding</item>
+        <item name="android:paddingRight">@dimen/error_text_padding</item>
+    </style>
+
+    <style name="retry_style">
+        <item name="android:background">@drawable/retry_background</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:text">@string/retry</item>
+        <item name="android:layout_marginTop">@dimen/retry_margin</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+</resources>

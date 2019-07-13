@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:orientation="vertical"
+                                                   android:background="@color/hacker_background"
+                                                   android:layout_width="match_parent"
+                                                   android:padding="@dimen/base_padding"
+                                                   android:layout_height="wrap_content">
+
+    <TextView android:id="@+id/story_title"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
+              tools:text="Hello This is sample news"
+              android:textSize="@dimen/title_text_size"
+              android:textColor="@android:color/black"/>
+
+    <TextView
+            android:id="@+id/description_text_view"
+            android:layout_width="0dp"
+            tools:text="This is sample"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/story_title"
+            app:layout_constraintStart_toStartOf="@+id/story_title"
+            app:layout_constraintEnd_toEndOf="@+id/story_title"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
