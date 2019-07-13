@@ -99,7 +99,10 @@ class HackerViewModel @Inject constructor(
     fun getStoryComment(story: Story) {
         commentDisposable.dispose()
 
+        //Clear the previous comments
         commentDisposable = CompositeDisposable()
+        listOfComments.clear()
+
         commentDisposable.add(
             Observable.fromIterable(story.kids)
                 .flatMap { hackerApi.getComment(it).toObservable() }
