@@ -145,11 +145,11 @@ class HomeNewsListFragment : DaggerFragment() {
      */
     private fun showNewsList(stories: List<Story>) {
         //Hide Loading if its showing else do nothing
+        news_list_container.isRefreshing = false
         if (news_list_container.visibility != View.VISIBLE) {
             loading_progress_bar.visibility = View.GONE
             news_list_container.visibility = View.VISIBLE
             retry_view_news_list.visibility = View.GONE
-            news_list_container.isRefreshing = false
         }
 
         //Refresh the Data
