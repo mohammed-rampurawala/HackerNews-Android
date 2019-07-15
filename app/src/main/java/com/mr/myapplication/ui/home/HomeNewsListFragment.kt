@@ -44,7 +44,7 @@ class HomeNewsListFragment : DaggerFragment() {
      */
     private lateinit var mHackerViewModel: HackerViewModel
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         retainInstance = true
         if (context is StorySelectionListener) {

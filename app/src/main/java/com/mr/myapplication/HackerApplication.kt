@@ -4,11 +4,11 @@ import com.mr.myapplication.di.DaggerHackerComponent
 import com.mr.myapplication.di.HackerComponent
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
-import timber.log.Timber.DebugTree
 import timber.log.Timber
+import timber.log.Timber.DebugTree
 
 
-class HackerApplication : DaggerApplication() {
+open class HackerApplication : DaggerApplication() {
 
     lateinit var hackerComponent: HackerComponent
 
@@ -17,18 +17,14 @@ class HackerApplication : DaggerApplication() {
         return hackerComponent
     }
 
-    private fun initComponent() {
-        if (!this::hackerComponent.isInitialized) {
-            hackerComponent = DaggerHackerComponent.builder().bindApp(this).build()
-        }
+    protected open fun initComponent() {
+        hackerComponent = DaggerHackerComponent.builder().bindApp(this).build()
     }
 
     override fun onCreate() {
         super.onCreate()
-        initComponent()
         if (BuildConfig.DEBUG) {
             Timber.plant(DebugTree())
         }
     }
-
 }

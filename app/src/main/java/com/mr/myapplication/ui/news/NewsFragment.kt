@@ -27,7 +27,7 @@ class NewsFragment : DaggerFragment() {
 
     private lateinit var mCommentsAdapter: CommentsAdapter
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         retainInstance = true
     }
