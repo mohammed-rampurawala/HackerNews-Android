@@ -15,6 +15,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "com.mr.myapplication.HackerTestRunner"
+        multiDexEnabled true
     }
     buildTypes {
         debug {
@@ -63,7 +64,8 @@ dependencies {
     androidTestImplementation "androidx.test:core:1.1.0"
     androidTestImplementation "androidx.test.ext:junit:1.1.1"
     androidTestImplementation "android.arch.core:core-testing:1.1.1"
-
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:3.2.0"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:3.2.0"
 
     /*.......// Retrofit ....//.....    */
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
