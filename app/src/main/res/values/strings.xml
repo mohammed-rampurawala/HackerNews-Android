@@ -9,6 +9,8 @@
     <string name="time_ago" formatted="false">%d %s ago</string>
     <string name="comment_is_deleted">This comment is deleted.</string>
     <string name="comments">Comments</string>
+    <string name="no_comments_available">This news contains no comments :(</string>
+    <string name="loading_comments">Loading comments</string>
 
     <plurals name="hour_plural">
         <item quantity="one">Hour</item>

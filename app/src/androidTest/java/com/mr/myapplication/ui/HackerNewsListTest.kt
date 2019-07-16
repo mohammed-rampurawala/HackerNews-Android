@@ -11,7 +11,6 @@ import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.Intents.intended
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import androidx.test.espresso.intent.rule.IntentsTestRule
-import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -23,7 +22,7 @@ import com.mr.myapplication.network.Story
 import com.mr.myapplication.ui.home.HackerNewsListActivity
 import com.mr.myapplication.ui.home.HomeNewsListFragment
 import com.mr.myapplication.ui.home.getByTimeAgo
-import com.mr.myapplication.ui.news.NewsActivity
+import com.mr.myapplication.ui.news.HackerNewsActivity
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Rule
@@ -36,7 +35,7 @@ import kotlin.test.assertNotNull
 
 
 @RunWith(AndroidJUnit4::class)
-class HackerNewsListFragmentTest {
+class HackerNewsListTest {
 
     private lateinit var app: TestHackerApplication
 
@@ -143,7 +142,7 @@ class HackerNewsListFragmentTest {
         onView(withId(R.id.news_list_recycler_view)).perform(actionOnItemAtPosition)
 
         //Then news activity should be opened
-        intended(hasComponent(NewsActivity::class.java.name))
+        intended(hasComponent(HackerNewsActivity::class.java.name))
         assert(Iterables.getOnlyElement(Intents.getIntents()).getBundleExtra("bundle").getParcelable<Story>("story") != null)
         intentActivityRule.finishActivity()
     }

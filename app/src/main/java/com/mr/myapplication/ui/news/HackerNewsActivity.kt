@@ -5,7 +5,7 @@ import com.mr.myapplication.R
 import com.mr.myapplication.network.Story
 import dagger.android.support.DaggerAppCompatActivity
 
-class NewsActivity : DaggerAppCompatActivity() {
+class HackerNewsActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

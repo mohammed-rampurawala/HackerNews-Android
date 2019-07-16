@@ -17,7 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.news.NewsActivity"/>
+        <activity android:name=".ui.news.HackerNewsActivity"/>
     </application>
 
 </manifest>

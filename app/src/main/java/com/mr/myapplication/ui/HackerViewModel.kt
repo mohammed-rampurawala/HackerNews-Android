@@ -103,6 +103,7 @@ class HackerViewModel @Inject constructor(
         commentDisposable = CompositeDisposable()
         listOfComments.clear()
 
+        mCommentsLiveData.postValue(Resource(ResourceState.LOADING, null))
         commentDisposable.add(
             Observable.fromIterable(story.kids)
                 .flatMap { hackerApi.getComment(it).toObservable() }
@@ -114,6 +115,9 @@ class HackerViewModel @Inject constructor(
                     mCommentsLiveData.postValue(Resource(ResourceState.SUCCESS, listOfComments))
                 }, {
                     Timber.e(it, "Error in loading comments")
+                    mCommentsLiveData.postValue(Resource(ResourceState.ERROR, null))
+                }, {
+                    mCommentsLiveData.postValue(Resource(ResourceState.HIDE_LOADING, null))
                 })
         )
     }

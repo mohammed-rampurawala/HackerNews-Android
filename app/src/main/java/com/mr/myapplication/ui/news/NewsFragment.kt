@@ -10,9 +10,11 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mr.myapplication.R
+import com.mr.myapplication.network.Comment
 import com.mr.myapplication.network.Story
 import com.mr.myapplication.ui.HackerViewModel
 import com.mr.myapplication.ui.home.getByTimeAgo
+import com.mr.myapplication.ui.home.model.ResourceState
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.news_fragment.*
 import java.util.*
@@ -41,8 +43,56 @@ class NewsFragment : DaggerFragment() {
         hackerViewModel = ViewModelProviders.of(this, vmFactory)[HackerViewModel::class.java]
         initCommentsRecyclerView()
         hackerViewModel.getCommentsLiveData().observe(this, androidx.lifecycle.Observer {
-            mCommentsAdapter.setListOfComments(it.data!!)
+            when (it.status) {
+                ResourceState.LOADING -> showLoading()
+                ResourceState.SUCCESS -> showComments(it.data)
+                ResourceState.ERROR -> showErrorScreen()
+                ResourceState.HIDE_LOADING -> hideLoading()
+                else -> hideCommentsContainer()
+            }
         })
+    }
+
+    private fun hideLoading() {
+        if (mCommentsAdapter.itemCount == 0) {
+            no_comments_textview.visibility = View.VISIBLE
+        }
+        comments_loading_container.visibility = View.GONE
+    }
+
+    private fun showErrorScreen() {
+        if (mCommentsAdapter.itemCount > 0) {
+            hideCommentsContainer()
+        }
+    }
+
+    /**
+     * Show comments list
+     */
+    private fun showComments(data: List<Comment>?) {
+        mCommentsAdapter.setListOfComments(data!!)
+
+        if (comments_list_container.visibility != View.VISIBLE) {
+            comments_list_container.visibility = View.VISIBLE
+        }
+    }
+
+    /**
+     * Show loading screen
+     */
+    private fun showLoading() {
+        comments_list_container.visibility = View.GONE
+        comments_loading_container.visibility = View.VISIBLE
+        no_comments_textview.visibility = View.GONE
+    }
+
+    /**
+     * Hide comments container and show no comments view
+     */
+    private fun hideCommentsContainer() {
+        comments_list_container.visibility = View.GONE
+        comments_loading_container.visibility = View.GONE
+        no_comments_textview.visibility = View.VISIBLE
     }
 
     /**
@@ -56,6 +106,9 @@ class NewsFragment : DaggerFragment() {
         comments_recycler_view.isNestedScrollingEnabled = false
     }
 
+    /**
+     * Refresh the comments view
+     */
     fun refresh(story: Story) {
         //Load the comments
         hackerViewModel.getStoryComment(story)

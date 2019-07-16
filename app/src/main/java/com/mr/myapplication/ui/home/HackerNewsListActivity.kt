@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.mr.myapplication.R
 import com.mr.myapplication.network.Story
-import com.mr.myapplication.ui.news.NewsActivity
+import com.mr.myapplication.ui.news.HackerNewsActivity
 import com.mr.myapplication.ui.news.NewsFragment
 import dagger.android.support.DaggerAppCompatActivity
 
@@ -25,10 +25,10 @@ class HackerNewsListActivity : DaggerAppCompatActivity(), StorySelectionListener
         if (mIsTwoPane) {
             (supportFragmentManager.findFragmentById(R.id.story_detail_fragment) as NewsFragment).refresh(story)
         } else {
-            val intent = Intent(this, NewsActivity::class.java)
+            val intent = Intent(this, HackerNewsActivity::class.java)
             val bundle = Bundle()
-            bundle.putParcelable(NewsActivity.STORY, story)
-            intent.putExtra(NewsActivity.BUNDLE, bundle)
+            bundle.putParcelable(HackerNewsActivity.STORY, story)
+            intent.putExtra(HackerNewsActivity.BUNDLE, bundle)
             startActivity(intent)
         }
     }

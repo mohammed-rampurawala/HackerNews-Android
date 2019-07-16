@@ -1,58 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                                       xmlns:app="http://schemas.android.com/apk/res-auto"
                                        xmlns:tools="http://schemas.android.com/tools"
                                        android:layout_width="match_parent"
+                                       android:fillViewport="true"
                                        android:padding="@dimen/base_padding"
                                        android:background="@color/hacker_background"
                                        android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:padding="@dimen/base_padding"
             android:background="@color/hacker_background"
             android:layout_height="wrap_content">
 
         <TextView android:id="@+id/story_title_text_view"
                   android:layout_width="match_parent"
-                  app:layout_constraintTop_toTopOf="parent"
-                  app:layout_constraintStart_toStartOf="parent"
-                  app:layout_constraintEnd_toEndOf="parent"
                   android:layout_height="wrap_content"
                   android:textColor="@color/colorAccent"
                   tools:text="Hello this is sample title"
                   android:textSize="@dimen/title_text_size"/>
 
         <TextView android:id="@+id/story_description_text_view"
-                  android:layout_width="0dp"
+                  android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   tools:text="@string/description"
                   android:textSize="@dimen/comment_text_size"
-                  app:layout_constraintStart_toStartOf="@id/story_title_text_view"
-                  app:layout_constraintEnd_toEndOf="@id/story_title_text_view"
-                  app:layout_constraintTop_toBottomOf="@id/story_title_text_view"
                   android:layout_marginBottom="@dimen/base_margin"
                   android:layout_marginTop="@dimen/base_margin"/>
 
-        <TextView android:id="@+id/comments_header"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:text="@string/comments"
-                  android:textSize="@dimen/comment_text_size"
-                  android:fontFamily="@string/roboto_black"
-                  app:layout_constraintStart_toStartOf="@id/story_title_text_view"
-                  app:layout_constraintEnd_toEndOf="@id/story_title_text_view"
-                  app:layout_constraintTop_toBottomOf="@id/story_description_text_view"
-                  android:layout_marginBottom="@dimen/base_margin"
-                  android:layout_marginTop="@dimen/base_margin"/>
+        <!--Comments list container-->
+        <LinearLayout
+                android:id="@+id/comments_list_container"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_height="wrap_content">
 
-        <androidx.recyclerview.widget.RecyclerView android:id="@+id/comments_recycler_view"
-                                                   android:layout_width="0dp"
-                                                   app:layout_constraintStart_toStartOf="@id/story_description_text_view"
-                                                   app:layout_constraintEnd_toEndOf="@id/story_description_text_view"
-                                                   app:layout_constraintTop_toBottomOf="@id/comments_header"
-                                                   app:layout_constraintBottom_toBottomOf="parent"
-                                                   android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/comments_header"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:text="@string/comments"
+                      android:textSize="@dimen/comment_text_size"
+                      android:fontFamily="@string/roboto_black"
+                      android:layout_marginBottom="@dimen/base_margin"
+                      android:layout_marginTop="@dimen/base_margin"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/comments_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <!--Loading container-->
+        <LinearLayout
+                android:id="@+id/comments_loading_container"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+            <ProgressBar
+                    android:id="@+id/comments_loading_progress_bar"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/loading_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/secondary_text_color"
+                    android:text="@string/loading_comments"
+                    android:textSize="@dimen/base_text_size"
+                    android:fontFamily="@string/roboto_regular"/>
+
+        </LinearLayout>
+
+        <!--Empty comments container-->
+        <TextView
+                android:id="@+id/no_comments_textview"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/base_margin"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary_text_color"
+                android:textSize="@dimen/title_text_size"
+                android:text="@string/no_comments_available"
+                android:fontFamily="@string/roboto_black"
+                android:gravity="center_horizontal"/>
+
+    </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -6,7 +6,7 @@ import com.mr.myapplication.core.HackerVMFactory
 import com.mr.myapplication.ui.HackerViewModel
 import com.mr.myapplication.ui.home.HackerNewsListActivity
 import com.mr.myapplication.ui.home.HomeNewsListFragment
-import com.mr.myapplication.ui.news.NewsActivity
+import com.mr.myapplication.ui.news.HackerNewsActivity
 import com.mr.myapplication.ui.news.NewsFragment
 import dagger.Binds
 import dagger.Module
@@ -26,7 +26,7 @@ abstract class HackerModule {
     abstract fun bindMainFragment(): HomeNewsListFragment
 
     @ContributesAndroidInjector
-    abstract fun bindNewsActivity(): NewsActivity
+    abstract fun bindNewsActivity(): HackerNewsActivity
 
     @ContributesAndroidInjector
     abstract fun bindNewsFragment(): NewsFragment

@@ -9,4 +9,5 @@
     <dimen name="title_text_size">18sp</dimen>
     <dimen name="base_margin">8dp</dimen>
     <dimen name="small_margin">4dp</dimen>
+    <dimen name="base_text_size">14sp</dimen>
 </resources>
