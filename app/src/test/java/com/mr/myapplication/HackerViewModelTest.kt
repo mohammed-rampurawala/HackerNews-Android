@@ -152,10 +152,17 @@ class HackerViewModelTest {
         )
         val comment = Comment("by", "8000", "asdad", "asdasdasd", "asdasda", 123124L, false)
         Mockito.`when`(hackerNewsAPI.getComment("8000")).thenReturn(Single.just(comment))
+
+        var loadingShown = false
         hackerViewModel.getCommentsLiveData().observeForever {
-            assert(it.status == ResourceState.SUCCESS)
-            assert(it.data?.size == 1)
-            assert(it.data?.get(0) == comment)
+            if (!loadingShown) {
+                assertEquals(ResourceState.LOADING, it.status)
+                loadingShown = true
+            } else {
+                assert(it.status == ResourceState.SUCCESS)
+                assert(it.data?.size == 1)
+                assert(it.data?.get(0) == comment)
+            }
         }
         hackerViewModel.getStoryComment(story)
     }
@@ -172,10 +179,15 @@ class HackerViewModelTest {
             "sample",
             "https://www.google.com"
         )
-        val comment = Comment("by", "8000", "asdad", "asdasdasd", "asdasda", 123124L, false)
         Mockito.`when`(hackerNewsAPI.getComment("8000")).thenReturn(Single.error(Exception("Runitime exception")))
+        var loadingShown = false
         hackerViewModel.getCommentsLiveData().observeForever {
-            assert(it.status == ResourceState.ERROR)
+            if (!loadingShown) {
+                assertEquals(ResourceState.LOADING, it.status)
+                loadingShown = true
+            } else {
+                assert(it.status == ResourceState.ERROR)
+            }
         }
         hackerViewModel.getStoryComment(story)
     }

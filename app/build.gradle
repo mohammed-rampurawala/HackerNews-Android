@@ -1,10 +1,9 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
+apply plugin: 'jacoco'
+
 
 android {
     compileSdkVersion 28
@@ -29,7 +28,9 @@ android {
 
 
     testOptions {
-        animationsDisabled = true
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
+        animationsDisabled true
+
         unitTests {
             includeAndroidResources = true
         }
@@ -39,6 +40,22 @@ android {
 ext {
     dagger_version = "2.23.2"
     mockito_version = "2.27.0"
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
+    def debugTree = fileTree(dir: "$project.buildDir/intermediates/javac/debug", excludes: fileFilter)
+    def mainSrc = "$project.projectDir/src/main/java"
+
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugTree])
+    executionData = fileTree(dir: project.buildDir, includes: ['jacoco/testDebugUnitTest.exec'])
 }
 
 dependencies {
