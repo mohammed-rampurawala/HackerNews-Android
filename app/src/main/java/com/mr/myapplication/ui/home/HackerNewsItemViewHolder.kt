@@ -35,11 +35,11 @@ class HackerNewsItemViewHolder(itemView: View, private val storyClickListener: (
     fun bind(story: Story) {
         mStoryTitleTextView.text = story.storyTitle
         itemView.setOnClickListener { storyClickListener.invoke(story) }
-        val resources = itemView.context.resources;
+        val resources = itemView.context.resources
 
         val kidsSize: Int = story.kids?.size ?: 0
 
-        val hours = mCurrentCalendar.getByTimeAgo(story.storyTime);
+        val hours = mCurrentCalendar.getByTimeAgo(story.storyTime)
 
         mDescriptionTextView.text = resources.getString(
             R.string.description,
