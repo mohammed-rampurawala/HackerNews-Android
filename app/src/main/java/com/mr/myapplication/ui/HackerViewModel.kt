@@ -207,6 +207,9 @@ class HackerViewModel @Inject constructor(
         return mStorySelectedLiveData
     }
 
+    /**
+     * Get list of already loaded comments
+     */
     fun getListOfComments(): List<Comment>? {
         return listOfComments
     }
