@@ -84,6 +84,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/secondary_text_color"
                 android:textSize="@dimen/title_text_size"
+                android:visibility="gone"
                 android:text="@string/no_comments_available"
                 android:fontFamily="@string/roboto_black"
                 android:gravity="center_horizontal"/>

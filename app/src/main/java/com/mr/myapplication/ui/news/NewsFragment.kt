@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,21 +43,32 @@ class NewsFragment : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
         hackerViewModel = ViewModelProviders.of(this, vmFactory)[HackerViewModel::class.java]
         initCommentsRecyclerView()
-        hackerViewModel.getCommentsLiveData().observe(this, androidx.lifecycle.Observer {
+        hackerViewModel.getCommentsLiveData().observe(this, Observer {
             when (it.status) {
                 ResourceState.LOADING -> showLoading()
-                ResourceState.SUCCESS -> showComments(it.data)
+                ResourceState.MORE_LOADING -> {
+                    showComments(it.data)
+                    comments_loading_container.visibility = View.VISIBLE
+                }
                 ResourceState.ERROR -> showErrorScreen()
                 ResourceState.HIDE_LOADING -> hideLoading()
                 else -> hideCommentsContainer()
             }
         })
+
+        hackerViewModel.getSelectedStoryLiveData().observe(this, Observer {
+            updateViews(it)
+        })
     }
 
     private fun hideLoading() {
-        if (mCommentsAdapter.itemCount == 0) {
+        //Check if data was loaded previously but due to config change it should be loaded again from view model
+        if (mCommentsAdapter.itemCount == 0 && hackerViewModel.getListOfComments()?.size != 0) {
+            showComments(hackerViewModel.getListOfComments())
+        } else if (hackerViewModel.getListOfComments()?.size == 0) {
             no_comments_textview.visibility = View.VISIBLE
         }
+
         comments_loading_container.visibility = View.GONE
     }
 
@@ -111,17 +123,14 @@ class NewsFragment : DaggerFragment() {
      */
     fun refresh(story: Story) {
         //Load the comments
+        hackerViewModel.setSelectedStory(story)
         hackerViewModel.getStoryComment(story)
-        updateViews(story)
     }
 
     private fun updateViews(story: Story) {
         story_title_text_view.text = story.storyTitle
-
         val kidsSize: Int = story.kids?.size ?: 0
-
         val hours = Calendar.getInstance().getByTimeAgo(story.storyTime)
-
         story_description_text_view.text = resources.getString(
             R.string.description,
             story.score,

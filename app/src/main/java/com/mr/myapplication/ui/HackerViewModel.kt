@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.mr.myapplication.network.Comment
 import com.mr.myapplication.network.IHackerNewsAPI
 import com.mr.myapplication.network.Story
-import com.mr.myapplication.ui.home.model.LoadingType
 import com.mr.myapplication.ui.home.model.Resource
 import com.mr.myapplication.ui.home.model.ResourceState
 import io.reactivex.Observable
@@ -44,6 +43,11 @@ class HackerViewModel @Inject constructor(
      * Live data to notify if there is more stories to load
      */
     private val mAddMoreItemLiveData: MutableLiveData<Boolean> = MutableLiveData()
+
+    /**
+     * The story selected
+     */
+    private val mStorySelectedLiveData: MutableLiveData<Story> = MutableLiveData()
 
     /**
      * Linked List of all the story ids received from the server. LinkedList because order of the ids need to be maintained.
@@ -93,6 +97,14 @@ class HackerViewModel @Inject constructor(
         )
     }
 
+
+    /**
+     * Set the selected story
+     */
+    fun setSelectedStory(story: Story) {
+        this.mStorySelectedLiveData.postValue(story)
+    }
+
     /**
      * Load comments for a story from server
      */
@@ -112,7 +124,7 @@ class HackerViewModel @Inject constructor(
                 .subscribe({
                     Timber.d("Comment Loaded::${it.text}")
                     listOfComments.add(it)
-                    mCommentsLiveData.postValue(Resource(ResourceState.SUCCESS, listOfComments))
+                    mCommentsLiveData.postValue(Resource(ResourceState.MORE_LOADING, listOfComments))
                 }, {
                     Timber.e(it, "Error in loading comments")
                     mCommentsLiveData.postValue(Resource(ResourceState.ERROR, null))
@@ -181,8 +193,22 @@ class HackerViewModel @Inject constructor(
         return mStoryLiveData
     }
 
+    /**
+     * Comments section live data
+     */
     fun getCommentsLiveData(): LiveData<Resource<List<Comment>>> {
         return mCommentsLiveData
+    }
+
+    /**
+     * Get the story live data which was selected
+     */
+    fun getSelectedStoryLiveData(): LiveData<Story> {
+        return mStorySelectedLiveData
+    }
+
+    fun getListOfComments(): List<Comment>? {
+        return listOfComments
     }
 
 }

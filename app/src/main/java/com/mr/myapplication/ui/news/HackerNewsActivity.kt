@@ -10,10 +10,13 @@ class HackerNewsActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.news_activity)
-        val newsFragment =
-            supportFragmentManager.findFragmentById(R.id.story_detail_fragment) as NewsFragment
-        intent.getBundleExtra(BUNDLE).getParcelable<Story>(STORY)?.let {
-            newsFragment.refresh(it)
+        //Don't refresh the view in case of config changes since story is being already loaded into the detail screen.
+        if (savedInstanceState == null) {
+            val newsFragment =
+                supportFragmentManager.findFragmentById(R.id.story_detail_fragment) as NewsFragment
+            intent.getBundleExtra(BUNDLE).getParcelable<Story>(STORY)?.let {
+                newsFragment.refresh(it)
+            }
         }
     }
 
