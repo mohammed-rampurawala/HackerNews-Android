@@ -2,6 +2,7 @@ package com.mr.myapplication.ui.news
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.mr.myapplication.R
 import com.mr.myapplication.network.Comment
@@ -24,9 +25,10 @@ class CommentsAdapter(private val inflater: LayoutInflater) : RecyclerView.Adapt
     }
 
     fun setListOfComments(comment: List<Comment>) {
+        val calculateDiff = DiffUtil.calculateDiff(CommentsDiffUtil(this.comments, comment))
         this.comments.clear()
         this.comments.addAll(comment)
-        notifyDataSetChanged()
+        calculateDiff.dispatchUpdatesTo(this)
     }
 
 }

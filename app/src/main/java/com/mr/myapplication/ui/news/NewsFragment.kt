@@ -51,7 +51,10 @@ class NewsFragment : DaggerFragment() {
                     comments_loading_container.visibility = View.VISIBLE
                 }
                 ResourceState.ERROR -> showErrorScreen()
-                ResourceState.HIDE_LOADING -> hideLoading()
+                ResourceState.HIDE_LOADING -> {
+                    showComments(it.data)
+                    hideLoading()
+                }
                 else -> hideCommentsContainer()
             }
         })
@@ -122,6 +125,7 @@ class NewsFragment : DaggerFragment() {
      * Refresh the comments view
      */
     fun refresh(story: Story) {
+        initCommentsRecyclerView()
         //Load the comments
         hackerViewModel.setSelectedStory(story)
         hackerViewModel.getStoryComment(story)
