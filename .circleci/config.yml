@@ -8,6 +8,9 @@ jobs:
       JVM_OPS: -Xmx3200m
     steps:
       - checkout
+      - - run:
+        name: Chmod permissions
+        command: sudo chmod +x ./gradlew
       - run:
           name: Download Dependencies
           command: ./gradlew androdDependencies
