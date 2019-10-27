@@ -33,3 +33,4 @@ jobs:
           command: ./gradlew --no-daemon --stacktrace assembleDebug
       - store_artifacts:
           path: app/build/apk
+          destination: apk
