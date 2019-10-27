@@ -8,7 +8,7 @@ jobs:
       JVM_OPS: -Xmx3200m
     steps:
       - checkout
-      - - run:
+      - run:
         name: Chmod permissions
         command: sudo chmod +x ./gradlew
       - run:
