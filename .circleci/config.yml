@@ -9,8 +9,8 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Chmod permissions
-        command: sudo chmod +x ./gradlew
+          name: Chmod permissions
+          command: sudo chmod +x ./gradlew
       - run:
           name: Download Dependencies
           command: ./gradlew androdDependencies
